@@ -15,6 +15,7 @@ class Extension extends BaseExtension
 
     public function initialize(): void
     {
+        $this->addTwigNamespace('redactor');
     }
 
     public function install(): void
