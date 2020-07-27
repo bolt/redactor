@@ -5,9 +5,10 @@
 
     <textarea type="text" name="{{ name }}" id="{{ id }}" value="{{ value }}"></textarea>
 
-    <script src="{{ asset('assets/redactor/redactor.js', 'public') }}"></script>
-    <link rel="stylesheet" href="{{ asset('assets/redactor/redactor.css', 'public') }}">
     <script>
-        $R('#{{ id }}');
+        window.setTimeout(function() {
+            $R('#{{ id }}', {{ redactor_settings() }});
+        }, 50);
     </script>
+
 {% endblock %}
