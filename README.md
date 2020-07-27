@@ -7,6 +7,7 @@ ContentTypes, as defined in `contenttypes.yaml`
 composer require bolt/redactor 
 ```
 
+
 -------
 
 The part below is only for _developing_ the extension. Not required for general
