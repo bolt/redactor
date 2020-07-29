@@ -48,10 +48,10 @@ class RedactorInjectorWidget extends BaseWidget implements TwigAwareInterface
 
             foreach ($plugins->get($item) as $file) {
                 if (Path::getExtension($file) === 'css') {
-                    $output .= sprintf('<link rel="stylesheet" href="/assets/redactor-plugins/%s">', $file);
+                    $output .= sprintf('<link rel="stylesheet" href="/assets/redactor/_plugins/%s">', $file);
                 }
                 if (Path::getExtension($file) === 'js') {
-                    $output .= sprintf('<script src="/assets/redactor-plugins/%s"></script>', $file);
+                    $output .= sprintf('<script src="/assets/redactor/_plugins/%s"></script>', $file);
                 }
             }
         }

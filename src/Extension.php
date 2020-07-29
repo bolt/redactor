@@ -29,6 +29,7 @@ class Extension extends BaseExtension
         $destination = $projectDir . '/' . $public . '/assets/';
 
         $filesystem = new Filesystem();
+        dump($source, $destination);
         $filesystem->mirror($source, $destination);
     }
 }
