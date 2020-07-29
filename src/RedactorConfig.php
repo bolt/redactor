@@ -1,10 +1,9 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Bolt\Redactor;
 
-
-use Bolt\Common\Json;
 use Bolt\Extension\ExtensionRegistry;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -31,26 +30,22 @@ class RedactorConfig
     {
         $extension = $this->registry->getExtension(Extension::class);
 
-        $config = array_merge($this->getDefaults(), $extension->getConfig()['default']);
-
-        return $config;
+        return array_merge($this->getDefaults(), $extension->getConfig()['default']);
     }
 
     public function getDefaults()
     {
-        $defaults = [
+        return [
             'imageUpload' => $this->urlGenerator->generate('bolt_redactor_upload', ['location' => 'files']),
             'imageUploadParam' => 'image',
             'multipleUpload' => 'false',
             'imageData' => [
-                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue()
+                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
             ],
-            "minHeight" => "200px",
-            "maxHeight" => "500px",
-            "structure" => true,
-            "pasteClean" => true,
+            'minHeight' => '200px',
+            'maxHeight' => '500px',
+            'structure' => true,
+            'pasteClean' => true,
         ];
-
-        return $defaults;
     }
 }

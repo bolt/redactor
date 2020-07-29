@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Bolt\Redactor;
 
 use Bolt\Configuration\Config;
+use Bolt\Controller\Backend\Async\AsyncZoneInterface;
 use Bolt\Controller\CsrfTrait;
 use Bolt\Twig\TextExtension;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Bolt\Controller\Backend\Async\AsyncZoneInterface;
 use Sirius\Upload\Handler;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -96,7 +97,6 @@ class Controllers implements AsyncZoneInterface
             if (is_array($files)) {
                 $files = current($files);
             }
-
 
             /** @var File $result */
             $result = $uploadHandler->process(['image' => $files]);
