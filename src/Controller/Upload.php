@@ -8,8 +8,10 @@ use Bolt\Configuration\Config;
 use Bolt\Controller\Backend\Async\AsyncZoneInterface;
 use Bolt\Controller\CsrfTrait;
 use Bolt\Twig\TextExtension;
+use Cocur\Slugify\Slugify;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sirius\Upload\Handler;
+use Sirius\Upload\Result\File;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -17,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Webmozart\PathUtil\Path;
 
 /**
  * @Security("is_granted('ROLE_ADMIN')")
@@ -65,12 +68,11 @@ class Upload implements AsyncZoneInterface
 
         $uploadHandler = new Handler($target, [
             Handler::OPTION_AUTOCONFIRM => true,
-            Handler::OPTION_OVERWRITE => true,
+            Handler::OPTION_OVERWRITE => false,
         ]);
 
         $acceptedFileTypes = array_merge($this->config->getMediaTypes()->toArray(), $this->config->getFileTypes()->toArray());
         $maxSize = $this->config->getMaxUpload();
-
         $uploadHandler->addRule(
             'extension',
             [
@@ -92,45 +94,34 @@ class Upload implements AsyncZoneInterface
         });
 
         try {
-            $files = current($request->files->all());
-
-            if (is_array($files)) {
-                $files = current($files);
-            }
-
             /** @var File $result */
-            $result = $uploadHandler->process(['image' => $files]);
+            $result = $uploadHandler->process($request->files->get('file'));
         } catch (\Throwable $e) {
             return new JsonResponse([
-                'error' => [
-                    'message' => $e->getMessage() . ' Ensure the upload does <em><u>not</u></em> exceed the maximum filesize of <b>' . $this->textExtension->formatBytes($maxSize) . '</b>, and that the destination folder (on the webserver) is writable.',
-                ],
-            ], Response::HTTP_BAD_REQUEST);
+                'error' => true,
+                'message' => 'Ensure the upload does NOT exceed the maximum filesize of ' . $this->textExtension->formatBytes($maxSize) . ', and that the destination folder (on the webserver) is writable.',
+            ], Response::HTTP_OK);
         }
 
         if ($result->isValid()) {
-            try {
-                $media = $this->mediaFactory->createFromFilename($locationName, $path, $result->__get('name'));
-                $this->em->persist($media);
-                $this->em->flush();
 
-                return new JsonResponse($media->getFilenamePath());
-            } catch (\Throwable $e) {
-                // something wrong happened, we don't need the uploaded files anymore
-                $result->clear();
+            $resultMessage = [
+                'filekey' => [
+                    'url' => '/thumbs/1000x1000/' . $result->name,
+                    'id' => 1,
+                ]
+            ];
 
-                throw $e;
-            }
+            return new JsonResponse($resultMessage, Response::HTTP_OK);
         }
 
         // image was not moved to the container, where are error messages
         $messages = $result->getMessages();
 
         return new JsonResponse([
-            'error' => [
-                'message' => implode(', ', $messages),
-            ],
-        ], Response::HTTP_BAD_REQUEST);
+            'error' => true,
+            'message' => implode(', ', $messages),
+            ], Response::HTTP_BAD_REQUEST);
     }
 
     private function sanitiseFilename(string $filename): string

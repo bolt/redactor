@@ -33,6 +33,6 @@ class TwigExtension extends AbstractExtension
     {
         $settings = $this->redactorConfig->getConfig();
 
-        return Json::json_encode($settings, JSON_HEX_QUOT | JSON_HEX_APOS);
+        return Json::json_encode($settings, JSON_HEX_QUOT | JSON_HEX_APOS | JSON_PRETTY_PRINT);
     }
 }

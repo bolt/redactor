@@ -37,15 +37,21 @@ class RedactorConfig
     {
         return [
             'imageUpload' => $this->urlGenerator->generate('bolt_redactor_upload', ['location' => 'files']),
-            'imageUploadParam' => 'image',
+            'imageUploadParam' => 'file',
             'multipleUpload' => 'false',
             'imageData' => [
                 '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
             ],
             'minHeight' => '200px',
-            'maxHeight' => '500px',
+            'maxHeight' => '700px',
             'structure' => true,
             'pasteClean' => true,
+            'source' => [
+                'codemirror' => [
+                    'lineNumbers' => true
+                ]
+            ],
+            'buttonsTextLabeled' => false
         ];
     }
 }
