@@ -2,16 +2,14 @@
 
 # All options: html, format, bold, italic, deleted, lists, link, file, line, redo, undo, underline, ol, ul, indent, outdent, sup, sub
 default:
-  buttons: [ format, bold, italic, deleted, lists, link, file, line, underline, html]
-  plugins: [fullscreen, table, inlinestyle, video, widget ]
+  buttons: [ bold, italic, format, lists, link, html, image ]
+  plugins: [ fullscreen, table, inlinestyle, video, widget ]
   source:
     codemirror:
       lineNumbers: true
   buttonsTextLabeled: false
   minHeight: 200px
   maxHeight: 500px
-  structure: true
-  pasteClean: true
 
 plugins:
   alignment: [ alignment/alignment.js ]

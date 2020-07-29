@@ -1,0 +1,3 @@
+services:
+    Bolt\Redactor\Controllers:
+        tags: ['controller.service_arguments']

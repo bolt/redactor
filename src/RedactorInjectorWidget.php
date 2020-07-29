@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Bolt\Redactor;
-
 
 use Bolt\Widget\BaseWidget;
 use Bolt\Widget\Injector\RequestZone;
@@ -41,16 +41,16 @@ class RedactorInjectorWidget extends BaseWidget implements TwigAwareInterface
 
         $output = '';
 
-        foreach($used as $item) {
-            if (!is_string($item) || ! $plugins->get($item)) {
+        foreach ($used as $item) {
+            if (! is_string($item) || ! $plugins->get($item)) {
                 continue;
             }
 
             foreach ($plugins->get($item) as $file) {
-                if (Path::getExtension($file) == 'css') {
+                if (Path::getExtension($file) === 'css') {
                     $output .= sprintf('<link rel="stylesheet" href="/assets/redactor-plugins/%s">', $file);
                 }
-                if (Path::getExtension($file) == 'js') {
+                if (Path::getExtension($file) === 'js') {
                     $output .= sprintf('<script src="/assets/redactor-plugins/%s"></script>', $file);
                 }
             }

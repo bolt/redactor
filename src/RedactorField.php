@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Bolt\Redactor;
 
@@ -15,4 +16,3 @@ class RedactorField extends Field implements Excerptable, FieldInterface
 {
     public const TYPE = 'redactor';
 }
-

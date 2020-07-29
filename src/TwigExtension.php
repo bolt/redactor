@@ -1,21 +1,25 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Bolt\Redactor;
 
 use Bolt\Common\Json;
 use Bolt\Extension\ExtensionRegistry;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TwigExtension extends AbstractExtension
 {
-    /** @var ExtensionRegistry */
-    private $registry;
+    /** @var RedactorConfig */
+    private $redactorConfig;
 
-    public function __construct(ExtensionRegistry $registry)
+    public function __construct(RedactorConfig $redactorConfig)
     {
-        $this->registry = $registry;
+        $this->redactorConfig = $redactorConfig;
     }
 
     public function getFunctions(): array
@@ -31,9 +35,10 @@ class TwigExtension extends AbstractExtension
 
     public function redactorSettings(): string
     {
-        $extension = $this->registry->getExtension(Extension::class);
-        $config = $extension->getConfig();
+        $settings = $this->redactorConfig->getConfig();
 
-        return Json::json_encode($config['default'], JSON_HEX_QUOT|JSON_HEX_APOS);
+        return Json::json_encode($settings, JSON_HEX_QUOT | JSON_HEX_APOS);
     }
+
+
 }

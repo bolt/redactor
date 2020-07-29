@@ -3,12 +3,6 @@
 
 {% block field %}
 
-    <textarea type="text" name="{{ name }}" id="{{ id }}" value="{{ value }}"></textarea>
-
-    <script>
-        window.setTimeout(function() {
-            $R('#{{ id }}', {{ redactor_settings() }});
-        }, 50);
-    </script>
+    <textarea type="text" name="{{ name }}" id="{{ id }}" class="redactor-field">{{ value }}</textarea>
 
 {% endblock %}

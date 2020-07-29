@@ -3,6 +3,10 @@
 <link rel="stylesheet" href="{{ asset('assets/redactor/redactor.css', 'public') }}">
 --- #}
 
-<script src="/assets/redactor/redactor.js"></script>
-<link rel="stylesheet" href="/assets/redactor/redactor.css">
+<script src="/assets/redactor/redactor.min.js"></script>
+<link rel="stylesheet" href="/assets/redactor/redactor.min.css">
 {{ additional_includes|raw }}
+<script>
+$R('.redactor-field', {{ redactor_settings() }});
+</script>
+
