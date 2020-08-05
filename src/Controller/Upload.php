@@ -43,7 +43,6 @@ class Upload implements AsyncZoneInterface
         $this->csrfTokenManager = $csrfTokenManager;
         $this->textExtension = $textExtension;
         $this->request = $requestStack->getCurrentRequest();
-        $this->requestStack = $requestStack;
     }
 
     /**
@@ -55,9 +54,8 @@ class Upload implements AsyncZoneInterface
             $this->validateCsrf('bolt_redactor');
         } catch (InvalidCsrfTokenException $e) {
             return new JsonResponse([
-                'error' => [
-                    'message' => 'Invalid CSRF token',
-                ],
+                'error' => true,
+                'message' => 'Invalid CSRF token',
             ], Response::HTTP_FORBIDDEN);
         }
 

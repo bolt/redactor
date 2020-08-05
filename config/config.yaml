@@ -4,12 +4,7 @@
 default:
   buttons: [ bold, italic, format, lists, link, html, image ]
   plugins: [ fullscreen, table, inlinestyle, video, widget ]
-  source:
-    codemirror:
-      lineNumbers: true
-  buttonsTextLabeled: false
-  minHeight: 200px
-  maxHeight: 500px
+  source: true
 
 plugins:
   alignment: [ alignment/alignment.js ]
