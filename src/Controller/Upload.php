@@ -104,12 +104,11 @@ class Upload implements AsyncZoneInterface
         }
 
         if ($result->isValid()) {
-
             $resultMessage = [
                 'filekey' => [
                     'url' => '/thumbs/1000x1000/' . $result->name,
                     'id' => 1,
-                ]
+                ],
             ];
 
             return new JsonResponse($resultMessage, Response::HTTP_OK);
@@ -121,7 +120,7 @@ class Upload implements AsyncZoneInterface
         return new JsonResponse([
             'error' => true,
             'message' => implode(', ', $messages),
-            ], Response::HTTP_BAD_REQUEST);
+        ], Response::HTTP_BAD_REQUEST);
     }
 
     private function sanitiseFilename(string $filename): string

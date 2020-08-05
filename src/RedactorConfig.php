@@ -48,10 +48,10 @@ class RedactorConfig
             'pasteClean' => true,
             'source' => [
                 'codemirror' => [
-                    'lineNumbers' => true
-                ]
+                    'lineNumbers' => true,
+                ],
             ],
-            'buttonsTextLabeled' => false
+            'buttonsTextLabeled' => false,
         ];
     }
 }

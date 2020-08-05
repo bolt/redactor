@@ -18,9 +18,6 @@ class RedactorInjectorWidget extends BaseWidget implements TwigAwareInterface
     protected $template = '@redactor/injector.html.twig';
     protected $priority = 200;
 
-    /** @var Canonical */
-    private $canonical;
-
     public function __construct()
     {
     }
