@@ -22,7 +22,7 @@ class RedactorField extends Field implements Excerptable, FieldInterface
      */
     public function getTwigValue()
     {
-        $value = $this->getParsedValue();
+        $value = parent::getTwigValue();
 
         return new Markup($value, 'UTF-8');
     }
