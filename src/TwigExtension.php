@@ -38,7 +38,6 @@ class TwigExtension extends AbstractExtension
         return Json::json_encode($settings, JSON_HEX_QUOT | JSON_HEX_APOS | JSON_PRETTY_PRINT);
     }
 
-
     public function redactorIncludes(): string
     {
         $used = $this->redactorConfig->getConfig()['plugins'];

@@ -8,7 +8,6 @@ use Bolt\Widget\BaseWidget;
 use Bolt\Widget\Injector\RequestZone;
 use Bolt\Widget\Injector\Target;
 use Bolt\Widget\TwigAwareInterface;
-use Webmozart\PathUtil\Path;
 
 class RedactorInjectorWidget extends BaseWidget implements TwigAwareInterface
 {
