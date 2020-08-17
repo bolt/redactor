@@ -21,38 +21,4 @@ class RedactorInjectorWidget extends BaseWidget implements TwigAwareInterface
     public function __construct()
     {
     }
-
-    protected function run(array $params = []): ?string
-    {
-        $additional = $this->getAdditionalIncludes();
-
-        return parent::run(['additional_includes' => $additional]);
-    }
-
-    private function getAdditionalIncludes()
-    {
-        $config = $this->getExtension()->getConfig();
-
-        $used = collect($config->get('default'))->flatten();
-        $plugins = collect($config->get('plugins'));
-
-        $output = '';
-
-        foreach ($used as $item) {
-            if (! is_string($item) || ! $plugins->get($item)) {
-                continue;
-            }
-
-            foreach ($plugins->get($item) as $file) {
-                if (Path::getExtension($file) === 'css') {
-                    $output .= sprintf('<link rel="stylesheet" href="/assets/redactor/_plugins/%s">', $file);
-                }
-                if (Path::getExtension($file) === 'js') {
-                    $output .= sprintf('<script src="/assets/redactor/_plugins/%s"></script>', $file);
-                }
-            }
-        }
-
-        return $output;
-    }
 }

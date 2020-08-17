@@ -7,26 +7,4 @@ default:
   source: true
 
 plugins:
-  alignment: [ alignment/alignment.min.js ]
-  beyondgrammar: [ beyondgrammar/beyondgrammar.min.js ]
-  clips: [ clips/clips.min.js, clips/clips.min.css ]
-  counter: [ counter/counter.min.js ]
-  definedlinks: [ definedlinks/definedlinks.min.js ]
-  filemanager: [ filemanager/filemanager.min.js, filemanager/filemanager.min.css ]
-  fontcolor: [ fontcolor/fontcolor.min.js ]
-  fontfamily: [ fontfamily/fontfamily.min.js ]
-  fontsize: [ fontsize/fontsize.min.js ]
-  fullscreen: [ fullscreen/fullscreen.min.js ]
-  handle: [ handle/handle.min.js, handle/handle.min.css ]
-  imagemanager: [ imagemanager/imagemanager.min.js ]
-  inlinestyle: [ inlinestyle/inlinestyle.min.js, inlinestyle/inlinestyle.min.js ]
-  limiter: [ limiter/limiter.min.js ]
-  pagebreak: [ pagebreak/pagebreak.min.js, pagebreak/pagebreak.min.css ]
-  properties: [ properties/properties.min.js ]
-  specialchars: [ specialchars/specialchars.min.js ]
-  table: [ table/table.min.js ]
-  textdirection: [ textdirection/textdirection.min.js ]
-  textexpander: [ textexpander/textexpander.min.js ]
-  variable: [ variable/variable.min.js, variable/variable.min.css ]
-  video: [ video/video.min.js ]
-  widget: [ widget/widget.min.js ]
+  ~

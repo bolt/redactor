@@ -5,7 +5,7 @@
 
 <script src="/assets/redactor/redactor.min.js"></script>
 <link rel="stylesheet" href="/assets/redactor/redactor.min.css">
-{{ additional_includes|raw }}
+{{ redactor_includes() }}
 <script>
     
     $R.options = {
@@ -26,6 +26,7 @@
     };
     
     function initRedactors() {
+        $('.redactor-field').removeClass('d-none');
         $R('.redactor-field', {{ redactor_settings() }});
     }
     
