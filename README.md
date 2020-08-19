@@ -35,8 +35,9 @@ The result will be like this:
 
 ![](https://user-images.githubusercontent.com/1833361/90637112-dbf59f80-e22b-11ea-8bfd-574b72a79fdc.png)
 
-You can configure the editor in `config/extensions/boltredactor.yaml`. The
-default configuration looks like this:
+You can configure the editor in `config/extensions/bolt-redactor.yaml`. This
+configuration affects all the instances of the Redactor field that you've
+configured in your ContentTypes. The default configuration looks like this:
 
 ```yaml
 default:
