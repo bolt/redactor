@@ -1,10 +1,5 @@
-{# todo: Use `asset`, but make sure the packages are set on POST, otherwise it'll break
-<script src="{{ asset('assets/redactor/redactor.js', 'public') }}"></script>
-<link rel="stylesheet" href="{{ asset('assets/redactor/redactor.css', 'public') }}">
---- #}
-
-<script src="/assets/redactor/redactor.min.js"></script>
-<link rel="stylesheet" href="/assets/redactor/redactor.min.css">
+<script src="{{ asset('assets/redactor/redactor.min.js', 'public') }}"></script>
+<link rel="stylesheet" href="{{ asset('assets/redactor/redactor.min.css', 'public') }}">
 {{ redactor_includes() }}
 <script>
     
