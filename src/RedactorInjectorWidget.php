@@ -20,15 +20,15 @@ class RedactorInjectorWidget extends BaseWidget implements TwigAwareInterface
     public function __construct()
     {
     }
-    
+
     public function run(array $params = []): ?string
     {
         // Only produce output when editing or creating a page.
         $route = $this->getExtension()->getRequest()->get('_route');
-        if (!in_array($route, ['bolt_content_edit', 'bolt_content_new'])) {
+        if (! in_array($route, ['bolt_content_edit', 'bolt_content_new'], true)) {
             return null;
         }
 
         return parent::run();
-    }    
+    }
 }

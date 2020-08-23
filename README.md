@@ -1,8 +1,11 @@
 # 📝 Bolt Redactor Extension
 
-This extension allows you to use fields of `type: redactor` in your
-ContentTypes, as defined in `contenttypes.yaml`. The editor itself is developed
-by [Imperavi][redactor], and is licensed for usage in Bolt.
+This extension provides a "Redactor" field is a sophisticated, lightweight and
+elegant WYSIWYG editor component for Bolt. The editor itself is developed by
+[Imperavi][redactor], and is licensed for usage in Bolt.
+
+This extension allows you to add fields of `type: redactor` in your
+ContentTypes, as defined in `contenttypes.yaml`, like any other Field type.
 
 ## Installation
 
@@ -15,7 +18,7 @@ composer require bolt/redactor
 ```
 
 After installation, you can add it to any ContentType in your
-`contenttypes.yaml` like any other field. For example:
+`contenttypes.yaml`, like any other field. For example:
 
 ```yaml
 blogposts:
