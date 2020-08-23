@@ -1,8 +1,8 @@
 # 📝 Bolt Redactor Extension
 
-This extension provides a "Redactor" field is a sophisticated, lightweight and
-elegant WYSIWYG editor component for Bolt. The editor itself is developed by
-[Imperavi][redactor], and is licensed for usage in Bolt.
+This extension provides a "Redactor" field type, which is a sophisticated,
+lightweight and elegant WYSIWYG editor component for Bolt. The editor itself is
+developed by [Imperavi][redactor], and is licensed for usage in Bolt.
 
 This extension allows you to add fields of `type: redactor` in your
 ContentTypes, as defined in `contenttypes.yaml`, like any other Field type.
@@ -58,8 +58,8 @@ Bolt's version of Redactor ships with all the official plugins and options. you
 can add or remove buttons by configuring them in the `buttons:` and `plugins:`
 parameters. Check the official Redactor documentation for [all available
 buttons][buttons]. Note that some buttons might require you to enable the
-corresponding plugin as well. See here for a list of [the available
-plugins][plugins].
+corresponding plugin as well. See here for a list of
+[the available plugins][plugins].
 
 ## Settings
 
@@ -96,7 +96,6 @@ placing it in `/public/assets/redactor/_plugins`. Then, add it to the
 default:
   buttons: [ … ]
   plugins: [ … ]
-  source: true
 
 plugins:
   myplugin: [ 'myplugin/myplugin.js', 'myplugin/myplugin.css' ]
