@@ -5,6 +5,8 @@ default:
   buttons: [ bold, italic, format, lists, link, html, image ]
   plugins: [ fullscreen, table, inlinestyle, video, widget ]
   source: true
+  image:
+    thumbnail: 1000×1000×max
 
 plugins:
   ~

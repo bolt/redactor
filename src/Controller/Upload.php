@@ -7,6 +7,7 @@ namespace Bolt\Redactor\Controller;
 use Bolt\Configuration\Config;
 use Bolt\Controller\Backend\Async\AsyncZoneInterface;
 use Bolt\Controller\CsrfTrait;
+use Bolt\Redactor\RedactorConfig;
 use Bolt\Twig\TextExtension;
 use Cocur\Slugify\Slugify;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -37,12 +38,16 @@ class Upload implements AsyncZoneInterface
     /** @var Request */
     private $request;
 
-    public function __construct(Config $config, CsrfTokenManagerInterface $csrfTokenManager, TextExtension $textExtension, RequestStack $requestStack)
+    /** @var RedactorConfig */
+    private $redactorConfig;
+
+    public function __construct(Config $config, CsrfTokenManagerInterface $csrfTokenManager, TextExtension $textExtension, RequestStack $requestStack, RedactorConfig $redactorConfig)
     {
         $this->config = $config;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->textExtension = $textExtension;
         $this->request = $requestStack->getCurrentRequest();
+        $this->redactorConfig = $redactorConfig;
     }
 
     /**
@@ -102,9 +107,11 @@ class Upload implements AsyncZoneInterface
         }
 
         if ($result->isValid()) {
+            $thumbnail = '/thumbs/' . $this->redactorConfig->getConfig()['image']['thumbnail'] . '/';
+
             $resultMessage = [
                 'filekey' => [
-                    'url' => '/thumbs/1000×1000×max/' . $result->name,
+                    'url' => $thumbnail . $result->name,
                     'id' => 1,
                 ],
             ];
