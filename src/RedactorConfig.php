@@ -46,7 +46,7 @@ class RedactorConfig
     {
         $extension = $this->registry->getExtension(Extension::class);
 
-        return array_merge_recursive($this->getDefaults(), $extension->getConfig()['default'], $this->getLinks());
+        return array_replace_recursive($this->getDefaults(), $extension->getConfig()['default'], $this->getLinks());
     }
 
     public function getPlugins(): array
@@ -56,7 +56,7 @@ class RedactorConfig
         $plugins = $this->getDefaultPlugins();
 
         if (is_array($extension->getConfig()['plugins'])) {
-            $plugins = array_merge_recursive($plugins, $extension->getConfig()['plugins']);
+            $plugins = array_replace_recursive($plugins, $extension->getConfig()['plugins']);
         }
 
         return $plugins;
