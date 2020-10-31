@@ -10,9 +10,13 @@ use Bolt\Extension\ExtensionRegistry;
 use Bolt\Storage\Query;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class RedactorConfig
 {
+    private const CACHE_DURATION = 1800; // 30 minutes
+
     /** @var ExtensionRegistry */
     private $registry;
 
@@ -28,38 +32,59 @@ class RedactorConfig
     /** @var Query */
     private $query;
 
+    /** @var array */
+    private $config = null;
+
+    /** @var array */
+    private $plugins = null;
+
+    /** @var CacheInterface */
+    private $cache;
+
     public function __construct(
         ExtensionRegistry $registry,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         Config $boltConfig,
-        Query $query
+        Query $query,
+        CacheInterface $cache
     ) {
         $this->registry = $registry;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->boltConfig = $boltConfig;
         $this->query = $query;
+        $this->cache = $cache;
     }
 
     public function getConfig(): array
     {
+        if ($this->config) {
+            return $this->config;
+        }
+
         $extension = $this->registry->getExtension(Extension::class);
 
-        return array_replace_recursive($this->getDefaults(), $extension->getConfig()['default'], $this->getLinks());
+        $this->config = array_replace_recursive($this->getDefaults(), $extension->getConfig()['default'], $this->getLinks());
+
+        return $this->config;
     }
 
     public function getPlugins(): array
     {
-        $extension = $this->registry->getExtension(Extension::class);
-
-        $plugins = $this->getDefaultPlugins();
-
-        if (is_array($extension->getConfig()['plugins'])) {
-            $plugins = array_replace_recursive($plugins, $extension->getConfig()['plugins']);
+        if ($this->plugins) {
+            return $this->plugins;
         }
 
-        return $plugins;
+        $extension = $this->registry->getExtension(Extension::class);
+
+        $this->plugins = $this->getDefaultPlugins();
+
+        if (is_array($extension->getConfig()['plugins'])) {
+            $this->plugins = array_replace_recursive($plugins, $extension->getConfig()['plugins']);
+        }
+
+        return $this->plugins;
     }
 
     public function getDefaults()
@@ -115,6 +140,15 @@ class RedactorConfig
 
     private function getLinks(): array
     {
+        return $this->cache->get('editor_insert_links', function (ItemInterface $item) {
+            $item->expiresAfter(self::CACHE_DURATION);
+
+            return $this->getLinksHelper();
+        });
+    }
+
+    private function getLinksHelper(): array
+    {
         $amount = 100;
         $params = [
             'status' => 'published',
@@ -149,3 +183,4 @@ class RedactorConfig
         ];
     }
 }
+git 
