@@ -183,4 +183,3 @@ class RedactorConfig
         ];
     }
 }
-git 
