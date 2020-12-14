@@ -90,7 +90,7 @@ default:
 
 If you've written your own plugin for Redactor according to the documentation
 [for Creating Plugins][create-plugin], you can add it to the editor in Bolt, by
-placing it in `/public/assets/redactor/_plugins`. Then, add it to the
+placing it in `/public/assets/redactor/plugins`. Then, add it to the
 `bolt-redactor.yaml` configuration:
 
 ```yaml
