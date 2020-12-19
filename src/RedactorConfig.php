@@ -90,6 +90,18 @@ class RedactorConfig
     public function getDefaults()
     {
         return [
+            'image' => [
+                'upload' => $this->urlGenerator->generate('bolt_article_upload', ['location' => 'files']),
+                'select' => $this->urlGenerator->generate('bolt_article_images', [
+                    '_csrf_token' => $this->csrfTokenManager->getToken('bolt_article')->getValue(),
+                    'foo' => '1', // To ensure token is cut off correctly
+                ]),
+                'data' => [
+                    '_csrf_token' => $this->csrfTokenManager->getToken('bolt_article')->getValue(),
+                ],
+                'multiple' => false,
+                'thumbnail' => '1000×1000×max',
+            ],
             'imageUpload' => $this->urlGenerator->generate('bolt_redactor_upload', ['location' => 'files']),
             'imageUploadParam' => 'file',
             'multipleUpload' => 'false',
