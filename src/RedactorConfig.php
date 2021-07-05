@@ -94,11 +94,16 @@ class RedactorConfig
                 'thumbnail' => '1000×1000×max',
             ],
             'imageUpload' => $this->urlGenerator->generate('bolt_redactor_upload', ['location' => 'files']),
+            'imageManagerJson' => $this->urlGenerator->generate('bolt_redactor_images', [
+                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
+                'foo' => '1', // To ensure token is cut off correctly
+            ]),
             'imageUploadParam' => 'file',
             'multipleUpload' => 'false',
             'imageData' => [
                 '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
             ],
+
             'minHeight' => '200px',
             'maxHeight' => '700px',
             'structure' => true,
@@ -143,7 +148,7 @@ class RedactorConfig
 
     private function getLinks(): array
     {
-        return $this->cache->get('editor_insert_links', function (ItemInterface $item) {
+        return $this->cache->get('redactor_insert_links', function (ItemInterface $item) {
             $item->expiresAfter(self::CACHE_DURATION);
 
             return $this->getLinksHelper();

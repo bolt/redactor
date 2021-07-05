@@ -1,12 +1,37 @@
-# Settings for Bolt Redactor
+# Settings for the Bolt Redactor field
 
-# All options: html, format, bold, italic, deleted, lists, link, file, line, redo, undo, underline, ol, ul, indent, outdent, sup, sub
+# Options added here, will be used in the Bolt backend to configure Redactor, passed in as
+# parameters to the `$R('#content', { … })` call.
+# See vendor/bolt/redactor/src/RedactorConfig.php::getDefaults for the default values. The values
+# below will be merged or appended with those values.
 default:
-  buttons: [ bold, italic, format, lists, link, html, image ]
-  plugins: [ fullscreen, table, inlinestyle, video, widget ]
-  source: true
+  # All options for buttons: html, format, bold, italic, deleted, lists, link, file, line, redo,
+  # undo, underline, ol, ul, indent, outdent, sup, sub
+  buttons: [ format, bold, italic, lists, link, html, image ]
+
+  # See https://imperavi.com/redactor/plugins/ for available plugins
+  # Common items include video, widget, counter, clips, imagemanager, definedlinks
+  plugins: [ fullscreen, table, video, imagemanager, definedlinks]
+
+  # Set this to false to hide the button to toggle showing the HTML source of the field. Setting it
+  # to plain `true` will override Redactor using the CodeMirror component, and it will show a plain
+  # source code editor instead.
+  # source: false
+
+  # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to false
+  # to insert a `<br>` tag instead.
+  breakline: false
+
+  # Settings for images
   image:
     thumbnail: 1000×1000×max
+  imageResizable: false
+  imagePosition: true
 
-plugins:
-  ~
+  # The tags to show in the 'Formatting' drop-down menu. Note: Block-level tags only!
+  # Use the `inlinestyles` plugin for inline tags
+  formatting: ['p', 'blockquote', 'pre', 'h2', 'h3', 'h4', 'h5']
+
+# If you have added custom plugins, add them to the mapping below.
+# plugins:
+#   myplugin: ['/assets/myplugin/myplugin.min.js', '/assets/myplugin/myplugin.min.css']
