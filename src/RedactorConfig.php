@@ -80,7 +80,7 @@ class RedactorConfig
 
         $this->plugins = $this->getDefaultPlugins();
 
-        if (is_array($extension->getConfig()['plugins'])) {
+        if (isset($extension->getConfig()['plugins']) && is_array($extension->getConfig()['plugins'])) {
             $this->plugins = array_replace_recursive($this->plugins, $extension->getConfig()['plugins']);
         }
 
