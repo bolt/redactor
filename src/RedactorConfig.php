@@ -9,6 +9,7 @@ use Bolt\Entity\Content;
 use Bolt\Extension\ExtensionRegistry;
 use Bolt\Storage\Query;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
@@ -41,13 +42,17 @@ class RedactorConfig
     /** @var CacheInterface */
     private $cache;
 
+    /** @var Security */
+    private $security;
+
     public function __construct(
         ExtensionRegistry $registry,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         Config $boltConfig,
         Query $query,
-        CacheInterface $cache
+        CacheInterface $cache,
+        Security $security
     ) {
         $this->registry = $registry;
         $this->urlGenerator = $urlGenerator;
@@ -55,6 +60,7 @@ class RedactorConfig
         $this->boltConfig = $boltConfig;
         $this->query = $query;
         $this->cache = $cache;
+        $this->security = $security;
     }
 
     public function getConfig(): array
@@ -89,7 +95,7 @@ class RedactorConfig
 
     public function getDefaults()
     {
-        return [
+        $defaults = [
             'image' => [
                 'thumbnail' => '1000×1000×max',
             ],
@@ -115,6 +121,16 @@ class RedactorConfig
             ],
             'buttonsTextLabeled' => false,
         ];
+
+        if (! $this->security->isGranted('upload')) {
+            $defaults['imageUpload'] = null;
+        }
+
+        if (! $this->security->isGranted('list_files:files')) {
+            $defaults['imageManagerJson'] = null;
+        }
+
+        return $defaults;
     }
 
     public function getDefaultPlugins()
