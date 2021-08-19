@@ -23,6 +23,8 @@ default:
   breakline: false
 
   # Settings for images
+  # Note: The current editor can only upload / insert images if they are granted 
+  # the 'upload' and 'list_files:files' permissions in `permissions.yaml`.
   image:
     thumbnail: 1000×1000×max
   imageResizable: false
