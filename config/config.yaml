@@ -19,12 +19,12 @@ default:
     # source code editor instead.
     # source: false
 
-    # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to true
+    # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to false
     # to insert a `<br>` tag instead.
     breakline: false
 
     # Settings for images
-    # Note: The current editor can only upload / insert images if they are granted 
+    # Note: The current editor can only upload / insert images if they are granted
     # the 'upload' and 'list_files:files' permissions in `permissions.yaml`.
     image:
         thumbnail: 1000×1000×max
@@ -50,17 +50,17 @@ default:
     # This setting allows to set maximum height for Redactor
     maxHeight: 700px
 
-    # This settings introduces visual indicators for HTML tags h1-h6 and div, helping users understand the structure of the document. 
+    # This settings introduces visual indicators for HTML tags h1-h6 and div, helping users understand the structure of the document.
     structure: false
 
     # This setting removes all new lines between tags in the Redactor source code
-    removeNewLines: true
+    removeNewLines: false
 
     # This setting removes the script tag in the HTML source.
     removeScript: true
 
     # To prevent Redactor from removing HTML comments, set this to false.
-    removeComments: false
+    removeComments: true
 
     # This setting will remove all tags and formatting from pasted text, excluding links and images.
     pastePlainText: false
@@ -69,7 +69,7 @@ default:
     pasteImages: false
 
     # Set this to false, and all links will be pasted as plain text.
-    pasteLinks: false
+    pasteLinks: true
 
     # This setting allows to turn off a browser spell checking for Redactor.
     spellcheck: true
@@ -83,4 +83,4 @@ default:
     # If you have added custom plugins, place them in `/assets/redactor/plugins/`, add them to the mapping below.
     # plugins:
     #   myplugin: ['myplugin/myplugin.min.js', '/myplugin/myplugin.min.css']
-       
+
