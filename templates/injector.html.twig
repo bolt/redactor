@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="{{ asset('assets/redactor/redactor.min.css', 'public') }}">
 {{ redactor_includes() }}
 <script>
-    
     $R.options = {
         callbacks: {
             image: {
@@ -19,49 +18,18 @@
             }
         }
     };
-    
+
     function initRedactors() {
         $('.redactor-field').removeClass('d-none');
         $R('.redactor-field', {{ redactor_settings() }});
     }
-    
+
     $(document).on('DOMNodeInserted', function(e) {
         if ( $(e.target).hasClass('collection-item') ) {
             initRedactors();
         }
     });
-    
+
     initRedactors();
-
 </script>
-<style>
-    .redactor-source, .redactor-styles {
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-    }
-
-    .redactor-styles img {
-        max-width: 75%;
-    }
-
-    .redactor-styles blockquote {
-        background-color: #F5F5F5;
-        border-left: 5px solid #dbdbdb;
-        padding: 1.25em 1.5em;
-        font-style: italic;
-        color: #31363A;
-    }
-
-    .redactor-styles blockquote p {
-        margin: 0;
-    }
-
-    {# See: https://github.com/bolt/redactor/issues/3 #}
-    .redactor-air, .redactor-toolbar {
-        z-index: 40;
-    }
-
-    .redactor-air, .redactor-toolbar a {
-        text-decoration: none !important;
-    }
-</style>
 

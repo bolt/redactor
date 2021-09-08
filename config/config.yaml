@@ -4,36 +4,83 @@
 # parameters to the `$R('#content', { … })` call.
 # See vendor/bolt/redactor/src/RedactorConfig.php::getDefaults for the default values. The values
 # below will be merged or appended with those values.
+
 default:
-  # All options for buttons: html, format, bold, italic, deleted, lists, link, file, line, redo,
-  # undo, underline, ol, ul, indent, outdent, sup, sub
-  buttons: [ format, bold, italic, lists, link, html, image ]
+    # All options for buttons: html, format, bold, italic, deleted, lists, link, file, line, redo,
+    # undo, underline, ol, ul, indent, outdent, sup, sub
+    buttons: [ format, bold, italic, lists, link, html, image ]
 
-  # See https://imperavi.com/redactor/plugins/ for available plugins
-  # Common items include video, widget, counter, clips, imagemanager, definedlinks
-  plugins: [ fullscreen, table, video, imagemanager, definedlinks]
+    # See https://imperavi.com/redactor/plugins/ for available plugins
+    # Common items include video, widget, counter, clips, imagemanager, definedlinks
+    plugins: [ fullscreen, table, video, imagemanager, definedlinks, clips]
 
-  # Set this to false to hide the button to toggle showing the HTML source of the field. Setting it
-  # to plain `true` will override Redactor using the CodeMirror component, and it will show a plain
-  # source code editor instead.
-  # source: false
+    # Set this to false to hide the button to toggle showing the HTML source of the field. Setting it
+    # to plain `true` will override Redactor using the CodeMirror component, and it will show a plain
+    # source code editor instead.
+    # source: false
 
-  # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to false
-  # to insert a `<br>` tag instead.
-  breakline: false
+    # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to false
+    # to insert a `<br>` tag instead.
+    breakline: false
 
-  # Settings for images
-  # Note: The current editor can only upload / insert images if they are granted 
-  # the 'upload' and 'list_files:files' permissions in `permissions.yaml`.
-  image:
-    thumbnail: 1000×1000×max
-  imageResizable: false
-  imagePosition: true
+    # Settings for images
+    # Note: The current editor can only upload / insert images if they are granted 
+    # the 'upload' and 'list_files:files' permissions in `permissions.yaml`.
+    image:
+        thumbnail: 1000×1000×max
+    imageResizable: false
+    imagePosition: true
 
-  # The tags to show in the 'Formatting' drop-down menu. Note: Block-level tags only!
-  # Use the `inlinestyles` plugin for inline tags
-  formatting: ['p', 'blockquote', 'pre', 'h2', 'h3', 'h4', 'h5']
+    # The tags to show in the 'Formatting' drop-down menu. Note: Block-level tags only!
+    # Use the `inlinestyles` plugin for inline tags
+    formatting: ['p', 'blockquote', 'pre', 'h2', 'h3', 'h4', 'h5']
 
-# If you have added custom plugins, add them to the mapping below.
-# plugins:
-#   myplugin: ['/assets/myplugin/myplugin.min.js', '/assets/myplugin/myplugin.min.css']
+    clips:
+        - ['Lorem ipsum...', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Respondent extrema primis, media utrisque, omnia omnibus. Sedulo, inquam, faciam. Expressa vero in iis aetatibus, quae iam confirmatae sunt. Duo Reges: constructio interrete. Si longus, levis; Bonum integritas corporis: misera debilitas.</p>']
+        - ['Callout (with list)', "<div class='callout-clip'><p>This is an example of the 'Callout clip'</p><ul><li>Item one</li><li>Item two</li><li>Item three</li></ul></div>"]
+
+    # Extra CSS and/or JS files to include in the backend. They can be sourced from the (provided) `/assets/` folder, or from the current theme
+    includes:
+        - 'assets/redactor/redactor-backend-extras.css'
+    #  - '%theme%/redactor-backend-extras.css'
+
+    # This setting allows to set minimum height for Redactor
+    minHeight: 200px
+
+    # This setting allows to set maximum height for Redactor
+    maxHeight: 700px
+
+    # This settings introduces visual indicators for HTML tags h1-h6 and div, helping users understand the structure of the document. 
+    structure: false
+
+    # This setting removes all new lines between tags in the Redactor source code
+    removeNewLines: true
+
+    # This setting removes the script tag in the HTML source.
+    removeScript: true
+
+    # To prevent Redactor from removing HTML comments, set this to false.
+    removeComments: false
+
+    # This setting will remove all tags and formatting from pasted text, excluding links and images.
+    pastePlainText: false
+
+    #  Whenever you need to exclude images from the content that users can paste, this setting is here for you.
+    pasteImages: false
+
+    # Set this to false, and all links will be pasted as plain text.
+    pasteLinks: false
+
+    # This setting allows to turn off a browser spell checking for Redactor.
+    spellcheck: true
+
+    # Whenever you need to control which block tags your users can paste, use this setting
+    # pasteBlockTags: ['blockquote', 'p']
+
+    # Whenever you need to control which inline tags your users can paste, use this setting.
+    # pasteInlineTags: ['a', 'br', 'strong', 'ins', 'code', 'del']
+
+    # If you have added custom plugins, place them in `/assets/redactor/plugins/`, add them to the mapping below.
+    # plugins:
+    #   myplugin: ['myplugin/myplugin.min.js', '/myplugin/myplugin.min.css']
+       

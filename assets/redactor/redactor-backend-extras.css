@@ -1,0 +1,41 @@
+/* Default Styles and overrides */
+.redactor-source, .redactor-styles {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+}
+
+.redactor-styles img {
+    max-width: 75%;
+}
+
+.redactor-styles blockquote {
+    background-color: #F5F5F5;
+    border-left: 5px solid #dbdbdb;
+    padding: 1.25em 1.5em;
+    font-style: italic;
+    color: #31363A;
+}
+
+.redactor-styles blockquote p {
+    margin: 0;
+}
+
+/* See: https://github.com/bolt/redactor/issues/3 */
+.redactor-air, .redactor-toolbar {
+    z-index: 40;
+}
+
+.redactor-air, .redactor-toolbar a {
+    text-decoration: none !important;
+}
+
+/* Clips */
+.callout-clip {
+    border: 1px solid #999;
+    background: #E8E8E8;
+    padding: 0.5rem;
+    margin: 1rem 0;
+}
+
+.callout-clip p {
+    font-weight: bold;
+}
