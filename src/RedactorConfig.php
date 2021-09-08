@@ -112,7 +112,7 @@ class RedactorConfig
 
             'minHeight' => '200px',
             'maxHeight' => '700px',
-            'structure' => true,
+            'structure' => false,
             'pasteClean' => true,
             'source' => [
                 'codemirror' => [
@@ -120,6 +120,7 @@ class RedactorConfig
                 ],
             ],
             'buttonsTextLabeled' => false,
+            'includes' => [],
         ];
 
         if (! $this->security->isGranted('upload')) {
