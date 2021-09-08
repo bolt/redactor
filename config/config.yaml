@@ -19,7 +19,7 @@ default:
     # source code editor instead.
     # source: false
 
-    # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to false
+    # By default, pressing the Enter key will start a new `<p>` paragraph. Set `breakline` to true
     # to insert a `<br>` tag instead.
     breakline: false
 
