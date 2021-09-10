@@ -104,12 +104,19 @@ class RedactorConfig
                 '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
                 'foo' => '1', // To ensure token is cut off correctly
             ]),
+            'fileUpload' => $this->urlGenerator->generate('bolt_redactor_upload', [
+                'location' => 'files',
+                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue()
+            ]),
+            'fileManagerJson' => $this->urlGenerator->generate('bolt_redactor_files', [
+                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
+                'foo' => '1', // To ensure token is cut off correctly
+            ]),
             'imageUploadParam' => 'file',
             'multipleUpload' => 'false',
             'imageData' => [
                 '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
             ],
-
             'minHeight' => '200px',
             'maxHeight' => '700px',
             'structure' => false,

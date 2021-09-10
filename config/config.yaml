@@ -8,11 +8,11 @@
 default:
     # All options for buttons: html, format, bold, italic, deleted, lists, link, file, line, redo,
     # undo, underline, ol, ul, indent, outdent, sup, sub
-    buttons: [ format, bold, italic, lists, link, html, image ]
+    buttons: [ format, bold, italic, lists, link, html, image, file ]
 
     # See https://imperavi.com/redactor/plugins/ for available plugins
     # Common items include video, widget, counter, clips, imagemanager, definedlinks
-    plugins: [ fullscreen, table, video, imagemanager, definedlinks, clips]
+    plugins: [ fullscreen, table, video, imagemanager, definedlinks, clips, filemanager ]
 
     # Set this to false to hide the button to toggle showing the HTML source of the field. Setting it
     # to plain `true` will override Redactor using the CodeMirror component, and it will show a plain

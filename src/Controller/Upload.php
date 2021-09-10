@@ -112,11 +112,15 @@ class Upload implements AsyncZoneInterface
         }
 
         if ($result->isValid()) {
-            $thumbnail = '/thumbs/' . $this->redactorConfig->getConfig()['image']['thumbnail'] . '/';
+            if ($this->isImage($result->name)) {
+                $prefix = '/thumbs/' . $this->redactorConfig->getConfig()['image']['thumbnail'] . '/';
+            } else {
+                $prefix = '/files/';
+            }
 
             $resultMessage = [
                 'filekey' => [
-                    'url' => $thumbnail . $result->name,
+                    'url' => $prefix . $result->name,
                     'id' => 1,
                 ],
             ];
@@ -142,5 +146,12 @@ class Upload implements AsyncZoneInterface
         $filename = $filenameSlug->slugify(Path::getFilenameWithoutExtension($filename));
 
         return $filename . '.' . $extension;
+    }
+
+    private function isImage(string $filename): bool
+    {
+        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+        return in_array($extension,  ['gif', 'png', 'jpg', 'jpeg', 'svg', 'avif', 'webp']);
     }
 }

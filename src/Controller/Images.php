@@ -65,16 +65,14 @@ class Images implements AsyncZoneInterface
         }
 
         $locationName = $this->request->query->get('location', 'files');
-        $type = $this->request->query->get('type', '');
-
         $path = $this->config->getPath($locationName, true);
 
-        $files = $this->getImageFilesIndex($path, $type);
+        $files = $this->getImageFilesIndex($path);
 
         return new JsonResponse($files);
     }
 
-    private function getImageFilesIndex(string $path, string $type): Collection
+    private function getImageFilesIndex(string $path): Collection
     {
         $glob = '*.{' . implode(',', self::getImageTypes()) . '}';
 
@@ -105,19 +103,16 @@ class Images implements AsyncZoneInterface
         }
 
         $locationName = $this->request->query->get('location', 'files');
-        $type = $this->request->query->get('type', '');
-
         $path = $this->config->getPath($locationName, true);
 
-        $files = $this->getFilesIndex($path, $type);
+        $files = $this->getFilesIndex($path);
 
         return new JsonResponse($files);
     }
 
-    private function getFilesIndex(string $path, string $type): Collection
+    private function getFilesIndex(string $path): Collection
     {
-        $fileTypes = $this->config->getFileTypes()->toArray();
-        $glob = '*.{' . implode(',', $fileTypes) . '}';
+        $glob = '*.{' . implode(',', self::getFileTypes()) . '}';
 
         $files = [];
 
@@ -149,5 +144,10 @@ class Images implements AsyncZoneInterface
     private static function getImageTypes(): array
     {
         return ['gif', 'png', 'jpg', 'jpeg', 'svg', 'avif', 'webp'];
+    }
+
+    private static function getFileTypes(): array
+    {
+        return ['doc', 'docx', 'txt', 'pdf', 'xls', 'xlsx', 'zip', 'tgz', 'gz'];
     }
 }
