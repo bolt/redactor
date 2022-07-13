@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=7.2.9"
+        "php": ">=7.2.9",
+        "webmozart/path-util": "^2.3"
     },
     "require-dev": {
         "bolt/core": "^5.0",
