@@ -8,9 +8,9 @@ use Bolt\Common\Json;
 use Bolt\Configuration\Config;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Filesystem\Path;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Webmozart\PathUtil\Path;
 
 class TwigExtension extends AbstractExtension
 {
