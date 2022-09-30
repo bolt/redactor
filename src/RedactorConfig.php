@@ -124,6 +124,9 @@ class RedactorConfig
             'source' => [
                 'codemirror' => [
                     'lineNumbers' => true,
+                    'lineWrapping' => true,
+                    'mode' => 'text/html',
+                    'matchBrackets' => true,
                 ],
             ],
             'buttonsTextLabeled' => false,
