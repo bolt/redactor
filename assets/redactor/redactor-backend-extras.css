@@ -19,6 +19,19 @@
     margin: 0;
 }
 
+.redactor-structure p::before {
+    content: "p";
+    width: 24px;
+    position: absolute;
+    font-size: 10px;
+    font-weight: 400;
+    opacity: .5;
+    left: -12px;
+    color: #555;
+    margin-top: 3px;
+    text-align: right;
+}
+
 /* See: https://github.com/bolt/redactor/issues/3 */
 .redactor-air, .redactor-toolbar {
     z-index: 40;
