@@ -52,3 +52,7 @@
 .callout-clip p {
     font-weight: bold;
 }
+
+small {
+    font-size: 85%;
+}

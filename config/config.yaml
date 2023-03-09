@@ -11,8 +11,8 @@ default:
     buttons: [ format, bold, italic, lists, link, html, image, file ]
 
     # See https://imperavi.com/redactor/plugins/ for available plugins
-    # Common items include video, widget, counter, clips, imagemanager, definedlinks
-    plugins: [ fullscreen, table, video, imagemanager, definedlinks, clips, filemanager ]
+    # Common items include video, widget, counter, clips, imagemanager, definedlinks, inlinestyle
+    plugins: [ inlinestyle, fullscreen, table, video, imagemanager, definedlinks, filemanager ]
 
     # Set this to false to hide the button to toggle showing the HTML source of the field. Setting it
     # to plain `true` will override Redactor using the CodeMirror component, and it will show a plain
@@ -32,8 +32,17 @@ default:
     imagePosition: true
 
     # The tags to show in the 'Formatting' drop-down menu. Note: Block-level tags only!
-    # Use the `inlinestyles` plugin for inline tags
-    formatting: ['p', 'blockquote', 'pre', 'h2', 'h3', 'h4', 'h5']
+    # Use the `inlinestyle` plugin for inline tags
+    formatting: ['p', 'blockquote', 'pre', 'h2', 'h3', 'h4', 'h5' ]
+
+    # Additional options for the `Formatting` drop-down menu. See for examples:
+    # https://imperavi.com/redactor/docs/settings/formatting/#s-formattingadd
+    formattingAdd:
+        small:
+            title: 'Small'
+            api: 'module.block.format'
+            args:
+                tag: 'small'
 
     clips:
         - ['Lorem ipsum...', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Respondent extrema primis, media utrisque, omnia omnibus. Sedulo, inquam, faciam. Expressa vero in iis aetatibus, quae iam confirmatae sunt. Duo Reges: constructio interrete. Si longus, levis; Bonum integritas corporis: misera debilitas.</p>']
