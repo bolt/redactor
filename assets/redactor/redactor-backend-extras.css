@@ -19,6 +19,11 @@
     margin: 0;
 }
 
+.redactor-styles small {
+    font-size: 85%;
+    font-family: inherit;
+}
+
 .redactor-structure p::before {
     content: "p";
     width: 24px;
@@ -51,8 +56,4 @@
 
 .callout-clip p {
     font-weight: bold;
-}
-
-small {
-    font-size: 85%;
 }
