@@ -24,12 +24,19 @@
         $R('.redactor-field', {{ redactor_settings() }});
     }
 
-    $(document).on('DOMNodeInserted', function(e) {
-        if ( $(e.target).hasClass('collection-item') ) {
-            initRedactors();
+    initRedactors();
+
+    const observer = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+            if (mutation.type === 'childList') {
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === 1 && $(node).hasClass('collection-item')) {
+                        initRedactors();
+                    }
+                });
+            }
         }
     });
 
-    initRedactors();
+    observer.observe(document.body, { childList: true, subtree: true });
 </script>
-
