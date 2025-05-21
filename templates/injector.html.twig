@@ -19,11 +19,6 @@
         }
     };
 
-    function initRedactors() {
-        $('.redactor-field').removeClass('d-none');
-        $R('.redactor-field', {{ redactor_settings() }});
-    }
-
     $(document).on('DOMNodeInserted', function(e) {
         if ( $(e.target).hasClass('collection-item') ) {
             initRedactors();
