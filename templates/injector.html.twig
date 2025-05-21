@@ -19,11 +19,11 @@
         }
     };
 
-    $(document).on('DOMNodeInserted', function(e) {
-        if ( $(e.target).hasClass('collection-item') ) {
-            initRedactors();
-        }
-    });
+function initRedactors() {
+        $('.redactor-field').removeClass('d-none');
+        $R('.redactor-field', {{ redactor_settings() }});
+    }
+
 
     const observerRedactor = new MutationObserver((mutations) => {
         for (let mutation of mutations) {
