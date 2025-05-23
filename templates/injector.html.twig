@@ -29,8 +29,7 @@
         for (let mutation of mutations) {
             if (mutation.type === 'childList' && mutation.addedNodes.length) {
                 mutation.addedNodes.forEach(node => {
-                    if (node.nodeType === Node.ELEMENT_NODE
-                        && node.classList.contains('collection-item')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('collection-item')) {
                         initRedactors();
                     }
                 });
