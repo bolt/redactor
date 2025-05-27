@@ -24,11 +24,10 @@
         $R('.redactor-field', {{ redactor_settings() }});
     }
 
-
-    const observerRedactor = new MutationObserver((mutations) => {
+    const observerRedactor = new MutationObserver(function (mutations) {
         for (let mutation of mutations) {
             if (mutation.type === 'childList' && mutation.addedNodes.length) {
-                mutation.addedNodes.forEach(node => {
+                for (let node of mutation.addedNodes) {
                     if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('collection-item')) {
                         initRedactors();
                     }
@@ -39,7 +38,7 @@
 
     observerRedactor.observe(document.body, {
         childList: true,
-        subtree:   true
+        subtree: true
     });
 
     initRedactors();
