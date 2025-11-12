@@ -13,7 +13,6 @@ use Bolt\Utils\ThumbnailHelper;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -28,7 +27,6 @@ class Images implements AsyncZoneInterface
 
     public function __construct(
         private readonly Config $config,
-        private readonly RequestStack $requestStack,
         private readonly ThumbnailHelper $thumbnailHelper,
         private readonly RedactorConfig $redactorConfig,
         CsrfTokenManagerInterface $csrfTokenManager,
@@ -48,7 +46,7 @@ class Images implements AsyncZoneInterface
             ], Response::HTTP_FORBIDDEN);
         }
 
-        $locationName = $this->requestStack->getCurrentRequest()->query->get('location', 'files');
+        $locationName = $request->query->get('location', 'files');
         $path = $this->config->getPath($locationName, true);
 
         $files = $this->getImageFilesIndex($path);
@@ -84,7 +82,7 @@ class Images implements AsyncZoneInterface
             ], Response::HTTP_FORBIDDEN);
         }
 
-        $locationName = $this->requestStack->getCurrentRequest()->query->get('location', 'files');
+        $locationName = $request->query->get('location', 'files');
         $path = $this->config->getPath($locationName, true);
 
         $files = $this->getFilesIndex($path);
