@@ -15,7 +15,6 @@ use Sirius\Upload\Result\File;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
@@ -31,7 +30,6 @@ class Upload implements AsyncZoneInterface
     public function __construct(
         private readonly Config $config,
         private readonly TextExtension $textExtension,
-        private readonly RequestStack $requestStack,
         private readonly RedactorConfig $redactorConfig,
         CsrfTokenManagerInterface $csrfTokenManager,
     ) {
