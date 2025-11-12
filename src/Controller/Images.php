@@ -38,7 +38,7 @@ class Images implements AsyncZoneInterface
     /** @var ThumbnailHelper */
     private $thumbnailHelper;
 
-    /** @var redactorConfig */
+    /** @var RedactorConfig */
     private $redactorConfig;
 
     public function __construct(Config $config, CsrfTokenManagerInterface $csrfTokenManager, RequestStack $requestStack, UrlGeneratorInterface $urlGenerator, ThumbnailHelper $thumbnailHelper, RedactorConfig $redactorConfig)

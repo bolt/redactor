@@ -77,7 +77,6 @@ class TwigExtension extends AbstractExtension
         $includes = $this->redactorConfig->getConfig()['includes'];
 
         foreach ($includes as $item) {
-
             $item = $this->makePath($item);
 
             if (Path::getExtension($item) === 'css') {

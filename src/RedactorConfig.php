@@ -106,7 +106,7 @@ class RedactorConfig
             ]),
             'fileUpload' => $this->urlGenerator->generate('bolt_redactor_upload', [
                 'location' => 'files',
-                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue()
+                '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
             ]),
             'fileManagerJson' => $this->urlGenerator->generate('bolt_redactor_files', [
                 '_csrf_token' => $this->csrfTokenManager->getToken('bolt_redactor')->getValue(),
