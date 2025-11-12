@@ -93,7 +93,7 @@ class RedactorConfig
         return $this->plugins;
     }
 
-    public function getDefaults()
+    public function getDefaults(): array
     {
         $defaults = [
             'image' => [
@@ -144,7 +144,7 @@ class RedactorConfig
         return $defaults;
     }
 
-    public function getDefaultPlugins()
+    public function getDefaultPlugins(): array
     {
         return [
             'alignment' => ['alignment/alignment.min.js'],
@@ -175,7 +175,7 @@ class RedactorConfig
 
     private function getLinks(): array
     {
-        return $this->cache->get('redactor_insert_links', function (ItemInterface $item) {
+        return $this->cache->get('redactor_insert_links', function (ItemInterface $item): array {
             $item->expiresAfter(self::CACHE_DURATION);
 
             return $this->getLinksHelper();
