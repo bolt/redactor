@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Bolt\Redactor\Controller;
 
-use Throwable;
 use Bolt\Configuration\Config;
 use Bolt\Controller\Backend\Async\AsyncZoneInterface;
 use Bolt\Controller\CsrfTrait;
@@ -22,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Throwable;
 
 /**
  * @Security("is_granted('upload')")
@@ -30,25 +30,14 @@ class Upload implements AsyncZoneInterface
 {
     use CsrfTrait;
 
-    /** @var Config */
-    private $config;
-
-    /** @var TextExtension */
-    private $textExtension;
-
-    /** @var Request */
-    private $request;
-
-    /** @var RedactorConfig */
-    private $redactorConfig;
-
-    public function __construct(Config $config, CsrfTokenManagerInterface $csrfTokenManager, TextExtension $textExtension, RequestStack $requestStack, RedactorConfig $redactorConfig)
-    {
-        $this->config = $config;
+    public function __construct(
+        private readonly Config $config,
+        private readonly TextExtension $textExtension,
+        private readonly RequestStack $requestStack,
+        private readonly RedactorConfig $redactorConfig,
+        CsrfTokenManagerInterface $csrfTokenManager,
+    ) {
         $this->csrfTokenManager = $csrfTokenManager;
-        $this->textExtension = $textExtension;
-        $this->request = $requestStack->getCurrentRequest();
-        $this->redactorConfig = $redactorConfig;
     }
 
     /**
@@ -58,15 +47,15 @@ class Upload implements AsyncZoneInterface
     {
         try {
             $this->validateCsrf('bolt_redactor');
-        } catch (InvalidCsrfTokenException $e) {
+        } catch (InvalidCsrfTokenException) {
             return new JsonResponse([
                 'error' => true,
                 'message' => 'Invalid CSRF token',
             ], Response::HTTP_FORBIDDEN);
         }
 
-        $locationName = $this->request->query->get('location', '');
-        $path = $this->request->query->get('path', '');
+        $locationName = $request->query->get('location', '');
+        $path = $request->query->get('path', '');
 
         $target = $this->config->getPath($locationName, true, $path);
 
@@ -93,9 +82,7 @@ class Upload implements AsyncZoneInterface
             'Upload file'
         );
 
-        $uploadHandler->setSanitizerCallback(function (string $name): string {
-            return $this->sanitiseFilename($name);
-        });
+        $uploadHandler->setSanitizerCallback($this->sanitiseFilename(...));
 
         try {
             /** @var File $result */
@@ -105,7 +92,7 @@ class Upload implements AsyncZoneInterface
             // later on, should we do a `Request::createFromGlobals();`
             // @see: https://github.com/bolt/core/issues/2027
             $_FILES = [];
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return new JsonResponse([
                 'error' => true,
                 'message' => 'Ensure the upload does NOT exceed the maximum filesize of ' . $this->textExtension->formatBytes($maxSize) . ', and that the destination folder (on the webserver) is writable.',

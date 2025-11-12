@@ -7,27 +7,17 @@ namespace Bolt\Redactor;
 use Bolt\Common\Json;
 use Bolt\Configuration\Config;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Filesystem\Path;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 class TwigExtension extends AbstractExtension
 {
-    /** @var RedactorConfig */
-    private $redactorConfig;
-
-    /** @var Config */
-    private $boltConfig;
-
-    /** @var Container */
-    private $container;
-
-    public function __construct(RedactorConfig $redactorConfig, Config $boltConfig, ContainerInterface $container)
-    {
-        $this->redactorConfig = $redactorConfig;
-        $this->boltConfig = $boltConfig;
-        $this->container = $container;
+    public function __construct(
+        private readonly RedactorConfig $redactorConfig,
+        private readonly Config $boltConfig,
+        private readonly ContainerInterface $container
+    ) {
     }
 
     public function getFunctions(): array
@@ -37,8 +27,8 @@ class TwigExtension extends AbstractExtension
         ];
 
         return [
-            new TwigFunction('redactor_settings', [$this, 'redactorSettings'], $safe),
-            new TwigFunction('redactor_includes', [$this, 'redactorIncludes'], $safe),
+            new TwigFunction('redactor_settings', $this->redactorSettings(...), $safe),
+            new TwigFunction('redactor_includes', $this->redactorIncludes(...), $safe),
         ];
     }
 
