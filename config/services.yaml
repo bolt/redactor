@@ -24,7 +24,7 @@ doctrine:
         mappings:
             Redactor:
                 is_bundle: false
-                type: annotation
+                type: attribute
                 dir: '%kernel.project_dir%/vendor/bolt/redactor/src/Entity'
                 prefix: 'Bolt\Redactor'
                 alias: Redactor
