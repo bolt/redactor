@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Bolt\Redactor\Controller;
 
+use Throwable;
 use Bolt\Configuration\Config;
 use Bolt\Controller\Backend\Async\AsyncZoneInterface;
 use Bolt\Controller\CsrfTrait;
@@ -92,7 +93,7 @@ class Upload implements AsyncZoneInterface
             'Upload file'
         );
 
-        $uploadHandler->setSanitizerCallback(function ($name) {
+        $uploadHandler->setSanitizerCallback(function (string $name): string {
             return $this->sanitiseFilename($name);
         });
 
@@ -104,7 +105,7 @@ class Upload implements AsyncZoneInterface
             // later on, should we do a `Request::createFromGlobals();`
             // @see: https://github.com/bolt/core/issues/2027
             $_FILES = [];
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return new JsonResponse([
                 'error' => true,
                 'message' => 'Ensure the upload does NOT exceed the maximum filesize of ' . $this->textExtension->formatBytes($maxSize) . ', and that the destination folder (on the webserver) is writable.',
