@@ -6,7 +6,6 @@ namespace Bolt\Redactor;
 
 use Bolt\Common\Json;
 use Bolt\Configuration\Config;
-use Psr\Container\ContainerInterface;
 use Symfony\Component\Filesystem\Path;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -16,7 +15,8 @@ class TwigExtension extends AbstractExtension
     public function __construct(
         private readonly RedactorConfig $redactorConfig,
         private readonly Config $boltConfig,
-        private readonly ContainerInterface $container
+        private readonly string $projectDir,
+        private readonly string $publicFolder,
     ) {
     }
 
@@ -84,7 +84,7 @@ class TwigExtension extends AbstractExtension
     private function makePath(string $item): string
     {
         $path = $this->boltConfig->getPath($item, false);
-        $publicFolder = $this->container->getParameter('kernel.project_dir') . '/' . $this->container->getParameter('bolt.public_folder');
+        $publicFolder = $this->projectDir . '/' . $this->publicFolder;
 
         $path = '/' . Path::makeRelative($path, $publicFolder);
 

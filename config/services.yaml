@@ -10,6 +10,11 @@ services:
     Bolt\Redactor\Controller\Upload:
         tags: ['controller.service_arguments']
 
+    Bolt\Redactor\TwigExtension:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $publicFolder: '%bolt.public_folder%'
+
 ### Map entities
 doctrine:
     orm:
