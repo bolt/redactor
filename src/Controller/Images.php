@@ -38,7 +38,7 @@ class Images implements AsyncZoneInterface
     public function getImagesList(Request $request): JsonResponse
     {
         try {
-            $this->validateCsrf('bolt_redactor');
+            $this->validateCsrf($request, 'bolt_redactor');
         } catch (InvalidCsrfTokenException) {
             return new JsonResponse([
                 'error' => true,
@@ -80,7 +80,7 @@ class Images implements AsyncZoneInterface
     public function getFilesList(Request $request): JsonResponse
     {
         try {
-            $this->validateCsrf('bolt_redactor');
+            $this->validateCsrf($request, 'bolt_redactor');
         } catch (InvalidCsrfTokenException) {
             return new JsonResponse([
                 'error' => true,
